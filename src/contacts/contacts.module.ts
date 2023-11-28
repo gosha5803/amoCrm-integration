@@ -1,21 +1,26 @@
 import { Module } from '@nestjs/common';
 import { ContactsController } from './contacts.controller';
 import { ContactsService } from './contacts.service';
-import { CrmIntegrationService } from 'src/crm-integration/crm-integration.service';
-import { CrmIntegrationModule } from 'src/crm-integration/crm-integration.module';
-import { HttpModule } from '@nestjs/axios';
+import { AuthModule } from 'src/auth/auth-module';
+import { AuthService } from 'src/auth/auth-service';
+import { AxiosModule } from 'src/axios/axios-module';
+import { LeadsModule } from 'src/leads/leads-module';
 
 @Module({
   controllers: [ContactsController],
-  providers: [ContactsService],
+  providers: [
+    ContactsService,
+    ],
   imports: [
-    CrmIntegrationModule,
-    HttpModule.registerAsync({
-      useFactory:() => ({
-        timeout: 5000,
-        maxRedirects: 5
-      })
-    })
-  ]
+    AxiosModule,
+    AuthModule,
+    LeadsModule    
+  ],
+  exports: [ContactsService]
 })
-export class ContactsModule {}
+export class ContactsModule {
+  constructor(private crmIntegration: AuthService) {}
+  async getTokens() {
+    const { accesToken } = await this.crmIntegration.getTokens()
+  }
+}

@@ -1,4 +1,4 @@
-export interface reqQueryBody{
+export interface reqQuery{
     code: string
     referer: string
     platform: string

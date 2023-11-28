@@ -1,7 +1,7 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument } from 'mongoose'
 
-export type TokensDoceument = HydratedDocument<Tokens>
+export type TokensDocument = HydratedDocument<Tokens>
 
 @Schema()
 export class Tokens {
@@ -11,8 +11,6 @@ export class Tokens {
     @Prop()
     refreshToken: string
 
-    // @Prop()
-    // authId: string
 }
 
 export const TokensSchema = SchemaFactory.createForClass(Tokens)

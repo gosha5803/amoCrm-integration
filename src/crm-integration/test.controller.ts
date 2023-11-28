@@ -1,10 +1,10 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ContactsService } from './contacts.service';
-import { LeadsService } from 'src/leads/leads-service';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { createContactRequest } from 'src/types/requestBody';
+import { ContactsService } from 'src/contacts/contacts.service';
+import { LeadsService } from 'src/leads/leads-service';
 
-@Controller('contacts')
-export class ContactsController {
+@Controller('test')
+export class TestController {
     constructor(
         private contactsService: ContactsService,
         private LeadsService: LeadsService
@@ -27,4 +27,5 @@ export class ContactsController {
     async testGet() {
         return await this.contactsService.patchContact()
     }
+
 }
