@@ -28,6 +28,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/sequelize": "^10.0.0",
     "axios": "^1.6.2",
+    "bcrypt": "^5.1.1",
     "mongoose": "^8.0.1",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",

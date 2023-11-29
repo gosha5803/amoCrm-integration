@@ -12,23 +12,20 @@ export class AuthService {
         private tokensModel: Model<TokensDocument>,
     ) {}
 
-    //Данный метод хэширует и сохраняет токены в БД.
+    //Данный метод сохраняет токены в БД.
     async saveTokens(keys: ITokens) {
         const existingTokens = await this.tokensModel.find()
-
+        
         if(existingTokens) {
-            const newTokens = await this.tokensModel.findByIdAndUpdate(existingTokens[0].id, {
-                refreshToken: keys.refreshToken,
-                accessToken: keys.accessToken
-            })
+            const newTokens = await this.tokensModel.findByIdAndUpdate(existingTokens[0].id, keys)
             return newTokens
         }
-
+        
         const tokens = await this.tokensModel.create(keys)
         return tokens
     }
 
-    //Метод для доступа к токенам, разкодирует и возвращает оба токена.
+    //Метод для доступа к токенам возвращает оба токена.
     async getTokens() {
         const data = await this.tokensModel.find()
         const tokens = {
