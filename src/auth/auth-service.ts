@@ -36,7 +36,7 @@ export class AuthService {
     }
 
     //Метод, необходимый для использования в интерцепторе, для обновления "протухшего" accessToken с помощью рефреш токена. Он запрашивает новый токен, сохраняет новую пару через метод выше и возвращает пару токенов.
-    async getTokensFromApi() {
+    async updateTokensFromApi() {
         const tokens = await this.getTokens()
         try {
             const { data } = await axios.post('https://godintzoff2015.amocrm.ru/oauth2/access_token',
@@ -52,11 +52,6 @@ export class AuthService {
                 refreshToken: data.refresh_token,
                 accessToken: data.access_token
             })
-
-            return {
-                refreshToken: data.refresh_token,
-                accessToken: data.access_token
-            }
         } catch (e) {
             console.log(e)
         }

@@ -24,11 +24,10 @@ export class AxiosService {
         $api.interceptors.response.use((config) => {
             return config
         }, async error => {
-            console.log(error)
             try {
                 const originalRequest = error.config
                 if(error.response?.status === 401) {
-                    await this.authService.getTokensFromApi()
+                    await this.authService.updateTokensFromApi()
                     return $api.request(originalRequest)
                 }
             } catch (e) {
