@@ -1,4 +1,4 @@
-export class TokensDto {
+export class ITokens {
     refreshToken: string
     accessToken: string
 }
