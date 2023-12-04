@@ -14,9 +14,9 @@ export class AuthService {
 
     //Данный метод сохраняет токены в БД.
     async saveTokens(keys: ITokens) {
-        const existingTokens = await this.tokensModel.find()
-        
-        if(existingTokens) {
+        const existingTokens: Array<any> = await this.tokensModel.find()
+
+        if(existingTokens.length) {
             const newTokens = await this.tokensModel.findByIdAndUpdate(existingTokens[0].id, keys)
             return newTokens
         }
